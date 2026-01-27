@@ -491,4 +491,175 @@
             } catch (e) {
                 console.error("SendPulse Contact Error:", e);
             }
-            retur
+            return null;
+        }
+
+        // ===== ФУНКЦІЯ ВІДМІТКИ АНКЕТИ В SENDPULSE =====
+        async function markAnketaFilled() {
+            const chatId = localStorage.getItem('tg_chat_id');
+            if (!chatId) return false;
+            
+            try {
+                const token = await getSendPulseToken();
+                if (!token) return false;
+                
+                const contactId = await getContactId(token, chatId);
+                if (!contactId) return false;
+                
+                await fetch('https://api.sendpulse.com/telegram/contacts/setVariable', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        bot_id: BOT_ID,
+                        contact_id: contactId,
+                        variable_name: 'anketa_filled',
+                        variable_value: 'yes'
+                    })
+                });
+                return true;
+            } catch (error) {
+                console.error('Помилка SendPulse:', error);
+                return false;
+            }
+        }
+
+        // Запуск відео
+        window.loadVideo = function() {
+            const container = document.getElementById('video-container');
+            const iframeWrapper = document.getElementById('iframe-wrapper');
+            const playBtn = document.getElementById('play-btn');
+            const thumbnail = document.getElementById('video-thumbnail');
+
+            playBtn.style.display = 'none';
+            thumbnail.style.display = 'none';
+            
+            iframeWrapper.innerHTML = `
+                <iframe 
+                    class="w-full h-full rounded-[2rem]"
+                    src="https://www.youtube.com/embed/dTPuMrYxiCA?autoplay=1&rel=0&showinfo=0&modestbranding=1" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            `;
+            iframeWrapper.classList.remove('hidden-element');
+            container.onclick = null;
+            container.classList.remove('cursor-pointer');
+        }
+
+        // Змінна для бібліотеки телефонів (глобальна)
+        let iti;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. ВАЛІДАЦІЯ ТЕЛЕФОНУ ---
+            const input = document.querySelector("#phone");
+            iti = window.intlTelInput(input, {
+                initialCountry: "auto",
+                geoIpLookup: callback => {
+                    fetch("https://ipapi.co/json")
+                        .then(res => res.json())
+                        .then(data => callback(data.country_code))
+                        .catch(() => callback("ua"));
+                },
+                utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+                separateDialCode: true,
+            });
+
+            // --- 2. ВАЛІДАЦІЯ TELEGRAM ---
+            const telegramInput = document.getElementById('telegram-input');
+            telegramInput.addEventListener('input', function(e) {
+                let value = e.target.value;
+                if (value.length > 0 && !value.startsWith('@')) {
+                    e.target.value = '@' + value;
+                }
+            });
+            telegramInput.addEventListener('blur', function(e) {
+                let value = e.target.value;
+                if (value.length > 0 && !value.startsWith('@')) {
+                    e.target.value = '@' + value;
+                }
+            });
+
+            // --- 3. ЛОГІКА ФОРМИ ---
+            const formSection = document.getElementById('form-section');
+            const landingScreen = document.getElementById('main-landing-screen');
+            const thankYouScreen = document.getElementById('thank-you-screen');
+
+            window.scrollToForm = function() {
+                formSection.scrollIntoView({ behavior: 'smooth' });
+            };
+
+            window.handleFormSubmit = function(e) {
+                e.preventDefault();
+                
+                // 1. Отримуємо і записуємо повний номер (з кодом країни)
+                if (iti) {
+                    const fullPhone = iti.getNumber();
+                    document.getElementById('full_phone').value = fullPhone;
+
+                    // Валідація номеру
+                    if (!iti.isValidNumber()) {
+                        alert("Будь ласка, введіть коректний номер телефону");
+                        return;
+                    }
+                }
+
+                // 2. Блокуємо кнопку, щоб не натиснули двічі
+                const btn = e.target.querySelector('button[type="submit"]');
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Відправка...';
+                btn.classList.add('opacity-75');
+
+                // 3. Збираємо всі дані з форми
+                const form = e.target;
+                const formData = new FormData(form);
+
+                // ===== ВІДПРАВКА В GOOGLE SHEETS =====
+                if (GOOGLE_SCRIPT_URL) {
+                    fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        body: formData,
+                        mode: 'no-cors'
+                    })
+                    .then(() => {
+                        console.log("Заявка успішно відправлена в Google Sheets");
+                        finalizeSubmission();
+                    })
+                    .catch((err) => {
+                        console.error("Помилка при відправці в Google:", err);
+                        finalizeSubmission();
+                    });
+                } else {
+                    console.warn("GOOGLE_SCRIPT_URL не встановлено!");
+                    finalizeSubmission();
+                }
+
+                // Допоміжна функція завершення
+                async function finalizeSubmission() {
+                    // Спроба відправити в SendPulse
+                    try {
+                        await markAnketaFilled();
+                    } catch (e) {
+                        console.log("SendPulse skipped");
+                    }
+
+                    // Перехід на екран подяки
+                    setTimeout(() => {
+                        landingScreen.style.opacity = '0';
+                        setTimeout(() => {
+                            landingScreen.classList.add('hidden-element');
+                            thankYouScreen.classList.remove('hidden-element');
+                            window.scrollTo(0, 0);
+                        }, 500);
+                    }, 500);
+                }
+            };
+        });
+    </script>
+</body>
+</html>
