@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <!-- Идеально под iPhone 14 Pro Max: запрет зума, правильная ширина -->
+    <!-- Адаптація під iPhone 14 Pro Max -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Svetlana Tape | Visual Expert</title>
+    <title>Система контенту | Victoria Meshcheriakova Style</title>
     
-    <!-- СТИЛЬ (Взято с Victoria Meshcheriakova): Шрифты -->
+    <!-- Шрифти (Стиль: Victoria / Visual Expert) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
 
     <style>
-        /* --- НАСТРОЙКИ ДИЗАЙНА (Как у Виктории) --- */
+        /* --- ДИЗАЙН-СИСТЕМА (Visual Expert) --- */
         :root {
-            --bg-color: #FDFBF8;       /* Тот самый молочный фон */
-            --text-main: #1C1C1C;      /* Темно-серый, почти черный */
-            --text-secondary: #666666; /* Серый для подписей */
-            --border-color: #D3D3D3;   /* Тонкие рамки */
+            --bg-color: #FDFBF8;       /* Молочний фон */
+            --text-main: #1C1C1C;      /* Чорний графіт */
+            --text-gray: #666666;      /* М'який сірий */
+            --border-color: #E0E0E0;   /* Тонкі лінії */
             
-            /* Шрифты */
-            --font-serif: 'Cormorant Garamond', serif; /* Для заголовков */
-            --font-sans: 'Montserrat', sans-serif;      /* Для текста и кнопок */
+            /* Шрифти */
+            --font-title: 'Cormorant Garamond', serif; 
+            --font-body: 'Montserrat', sans-serif;
         }
 
         * {
@@ -34,63 +34,65 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            font-family: var(--font-sans);
-            line-height: 1.5;
+            font-family: var(--font-body);
+            line-height: 1.6;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
         }
 
-        /* КОНТЕЙНЕР (Под iPhone 14 Pro Max) */
+        /* Контейнер (iPhone 14 Pro Max ~430px) */
         .container {
             width: 100%;
-            max-width: 430px; 
-            padding: 40px 20px;
+            max-width: 450px; 
+            padding: 40px 24px;
             display: flex;
             flex-direction: column;
-            gap: 30px; /* Отступы между блоками */
         }
 
-        /* 1. БЛОК: ШАПКА (Аватар + Имя) */
+        /* 1. ШАПКА */
         .header {
             text-align: center;
+            margin-bottom: 30px;
         }
 
         .avatar {
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             object-fit: cover;
-            margin-bottom: 15px;
-            /* Стильный бордер как у Виктории */
-            border: 1px solid rgba(0,0,0,0.05); 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         h1 {
-            font-family: var(--font-serif);
-            font-size: 28px;
+            font-family: var(--font-title);
+            font-size: 30px;
             font-weight: 500;
-            letter-spacing: 0.5px;
             margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.1;
         }
 
         .subtitle {
-            font-size: 14px;
-            color: var(--text-secondary);
-            font-weight: 300;
+            font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 2px;
+            color: var(--text-gray);
+            margin-bottom: 30px;
         }
 
-        /* 2. БЛОК: ВИДЕО (1 в 1 как на сайте Светланы, но стильно) */
+        /* 2. ВІДЕО */
         .video-wrapper {
             position: relative;
             padding-bottom: 56.25%; /* 16:9 */
             height: 0;
             background: #000;
-            border-radius: 2px; /* Минимальное скругление */
+            margin-bottom: 40px;
+            border-radius: 2px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             overflow: hidden;
         }
 
@@ -103,89 +105,125 @@
             border: 0;
         }
 
-        /* 3. БЛОК: ТЕКСТ (Контент Светланы) */
-        .content-text {
-            font-size: 15px;
-            font-weight: 300;
-            text-align: left;
-            white-space: pre-wrap; /* Сохраняет абзацы */
+        /* 3. ТЕКСТОВИЙ БЛОК (Структурований з транскрипції) */
+        .content {
+            margin-bottom: 40px;
         }
 
-        /* Заголовки внутри текста делаем красивыми */
-        .content-text h3 {
-            font-family: var(--font-serif);
-            font-size: 22px;
-            margin-top: 20px;
-            margin-bottom: 10px;
+        .content h2 {
+            font-family: var(--font-title);
+            font-size: 24px;
             font-weight: 600;
+            margin-bottom: 20px;
+            text-align: left;
+            font-style: italic;
         }
 
-        /* 4. БЛОК: КНОПКА (Ссылка) */
+        .content p {
+            font-size: 14px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            color: var(--text-main);
+            text-align: justify;
+        }
+
+        .content ul {
+            list-style: none;
+            margin-bottom: 25px;
+            padding-left: 10px;
+        }
+
+        .content ul li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .content ul li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: var(--text-main);
+        }
+
+        .highlight {
+            font-family: var(--font-title);
+            font-size: 18px;
+            font-weight: 600;
+            display: block;
+            margin: 25px 0 10px 0;
+            text-align: center;
+        }
+
+        /* 4. КНОПКА */
         .btn-link {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: block;
             width: 100%;
             padding: 18px;
             text-align: center;
-            background-color: transparent;
-            color: var(--text-main);
             border: 1px solid var(--text-main);
+            background: transparent;
+            color: var(--text-main);
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 13px;
+            font-size: 12px;
             letter-spacing: 2px;
-            transition: 0.3s;
+            transition: all 0.3s;
+            margin-bottom: 50px;
+            cursor: pointer;
         }
 
         .btn-link:hover {
-            background-color: var(--text-main);
+            background: var(--text-main);
             color: #fff;
         }
 
-        /* 5. БЛОК: АНКЕТА (Функционал Светланы, Стиль Виктории) */
-        .form-container {
+        /* 5. АНКЕТА (Запит з транскрипції) */
+        .form-section {
             border-top: 1px solid var(--border-color);
             padding-top: 40px;
-            margin-top: 20px;
         }
 
         .form-title {
-            font-family: var(--font-serif);
+            font-family: var(--font-title);
             font-size: 26px;
             text-align: center;
             margin-bottom: 10px;
         }
 
         .form-desc {
-            font-size: 13px;
             text-align: center;
-            color: var(--text-secondary);
+            font-size: 13px;
+            color: var(--text-gray);
             margin-bottom: 30px;
+            font-weight: 300;
+            line-height: 1.4;
         }
 
+        /* Інпути в стилі Вікторії */
         .input-group {
             margin-bottom: 25px;
         }
 
         label {
             display: block;
-            font-size: 11px;
+            font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 8px;
-            color: var(--text-secondary);
+            color: var(--text-gray);
         }
 
-        /* Инпуты в стиле Виктории (подчеркивания) */
         input {
             width: 100%;
             padding: 12px 0;
+            background: transparent;
             border: none;
             border-bottom: 1px solid var(--border-color);
-            background: transparent;
-            font-family: var(--font-sans);
-            font-size: 16px; /* ВАЖНО для iPhone */
+            font-family: var(--font-body);
+            font-size: 16px; /* Важливо для iOS */
             color: var(--text-main);
             border-radius: 0;
             -webkit-appearance: none;
@@ -203,101 +241,116 @@
             background-color: var(--text-main);
             color: #fff;
             border: none;
-            font-family: var(--font-sans);
-            font-size: 14px;
+            font-family: var(--font-body);
+            font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 2px;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         footer {
-            margin-top: 40px;
+            margin-top: 60px;
             font-size: 10px;
-            color: #ccc;
             text-align: center;
+            color: #bbb;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-
     </style>
 </head>
 <body>
 
     <div class="container">
 
-        <!-- 1. АВАТАР И ЗАГОЛОВОК (Замени на данные Светланы) -->
+        <!-- 1. ШАПКА -->
         <div class="header">
-            <!-- Ссылка на фото Светланы -->
-            <img src="https://via.placeholder.com/150" alt="Svetlana Tape" class="avatar">
-            <h1>Svetlana Tape</h1>
-            <div class="subtitle">Creator & Visual Expert</div>
+            <!-- Вставте своє фото в src -->
+            <img src="https://via.placeholder.com/150" alt="Avatar" class="avatar">
+            <h1>Вікторія Мещерякова</h1>
+            <div class="subtitle">Content & Visual Expert</div>
         </div>
 
-        <!-- 2. ВИДЕО -->
+        <!-- 2. ВІДЕО -->
+        <!-- !!! ВАЖЛИВО: Замініть ID у посиланні на ваше відео !!! -->
         <div class="video-wrapper">
-            <!-- Вставь сюда ссылку на видео с лендинга Светланы -->
+            <!-- Наприклад, якщо посилання https://youtu.be/dQw4w9WgXcQ, то ID це dQw4w9WgXcQ -->
             <iframe 
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=1" 
-                title="YouTube video" 
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=1&modestbranding=1&rel=0" 
+                title="Lesson Video" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowfullscreen>
             </iframe>
         </div>
 
-        <!-- 3. ТЕКСТ (Скопируй текст с сайта svetlanatape и вставь сюда) -->
-        <div class="content-text">
-            <h3>ЗАГОЛОВОК С ЛЕНДИНГА СВЕТЛАНЫ</h3>
+        <!-- 3. ТЕКСТ (З вашої транскрипції) -->
+        <div class="content">
+            <h2>Як у 2026 році побудувати систему роботи з контентом</h2>
+            
             <p>
-                Вставь сюда текст, который написан на том сайте. 
-                Просто скопируй абзацы и вставь сюда.
-                <br><br>
-                Например: "Как я сделала результат..."
+                Блог без фундаменту викликає фонову тривожність. Я витратила на це усвідомлення декілька років, але ви можете зробити це за один день.
+            </p>
+            <p>
+                Ефективний контент — це система, яка поєднує в собі три ключові елементи:
+            </p>
+
+            <ul>
+                <li><strong>Фундамент блогу</strong> — позбавляє хаосу та дає розуміння, що знімати.</li>
+                <li><strong>Візуальна складова</strong> — чіпляє увагу та робить інформацію читабельною.</li>
+                <li><strong>Сенси</strong> — створюють правильне враження та прогрівають до вас як до особистості та експерта.</li>
+            </ul>
+
+            <span class="highlight">СТВОРЮЙ: ВІЗУАЛ • СЕНСИ • КОНТЕНТ</span>
+            
+            <p>
+                Це структуроване навчання з чіткими кроками, яке охопить всі сфери роботи з блогом. У вас будуть готові шаблони, уроки без води та моя особиста підтримка.
             </p>
         </div>
 
-        <!-- 4. КНОПКА (Если там была кнопка перехода) -->
-        <a href="https://t.me/ссылка_светланы" class="btn-link">
-            ТЕКСТ НА КНОПКЕ С ТОГО САЙТА
+        <!-- 4. КНОПКА -->
+        <!-- Веде вниз до анкети, або на оплату -->
+        <a href="#form" class="btn-link">
+            ЗАПОВНИТИ АНКЕТУ ПРЕДЗАПИСУ
         </a>
 
-        <!-- 5. АНКЕТА (Структура Светланы: Поля те же самые) -->
-        <div class="form-container">
-            <div class="form-title">АНКЕТА ПРЕДЗАПИСИ</div>
-            <div class="form-desc">Заполни форму, как на сайте Светланы</div>
+        <!-- 5. АНКЕТА -->
+        <div class="form-section" id="form">
+            <div class="form-title">АНКЕТА</div>
+            <div class="form-desc">
+                Заповніть форму, щоб отримати спеціальну ціну та потрапити на розбір у Zoom.
+            </div>
             
+            <!-- Підключіть Formspree або інший сервіс в action -->
             <form action="#" method="POST">
                 
-                <!-- Поле 1 -->
                 <div class="input-group">
-                    <label for="name">Имя</label>
-                    <input type="text" id="name" placeholder="Введите ваше имя" required>
+                    <label for="name">Ваше Ім'я</label>
+                    <input type="text" id="name" name="name" placeholder="Введіть ім'я" required>
                 </div>
 
-                <!-- Поле 2 -->
                 <div class="input-group">
-                    <label for="instagram">Ник в Instagram</label>
-                    <input type="text" id="instagram" placeholder="@username" required>
+                    <label for="instagram">Instagram</label>
+                    <input type="text" id="instagram" name="instagram" placeholder="@username" required>
                 </div>
 
-                <!-- Поле 3 -->
                 <div class="input-group">
-                    <label for="telegram">Ник в Telegram</label>
-                    <input type="text" id="telegram" placeholder="@username" required>
+                    <label for="telegram">Telegram</label>
+                    <input type="text" id="telegram" name="telegram" placeholder="@username" required>
                 </div>
 
-                <!-- Поле 4 -->
                 <div class="input-group">
-                    <label for="phone">Телефон</label>
-                    <input type="tel" id="phone" placeholder="+380..." required>
+                    <label for="phone">Номер телефону</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+380..." required>
                 </div>
 
-                <button type="submit" class="btn-submit">ОТПРАВИТЬ</button>
+                <button type="submit" class="btn-submit">
+                    НАДІСЛАТИ ЗАЯВКУ
+                </button>
             </form>
         </div>
 
         <footer>
-            © 2024 Designed by Visual Style
+            © 2024 Course Create. All rights reserved.
         </footer>
 
     </div>
