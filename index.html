@@ -2,47 +2,37 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <!-- Адаптація під iPhone 14 Pro Max -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Система контенту | Victoria Meshcheriakova Style</title>
+    <title>Система контенту 2026</title>
     
-    <!-- Шрифти (Стиль: Victoria / Visual Expert) -->
+    <!-- Шрифти: Cormorant + Montserrat (Стиль Visual Expert) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
 
     <style>
-        /* --- ДИЗАЙН-СИСТЕМА (Visual Expert) --- */
         :root {
-            --bg-color: #FDFBF8;       /* Молочний фон */
-            --text-main: #1C1C1C;      /* Чорний графіт */
-            --text-gray: #666666;      /* М'який сірий */
-            --border-color: #E0E0E0;   /* Тонкі лінії */
-            
-            /* Шрифти */
+            --bg-color: #FDFBF8;
+            --text-main: #1C1C1C;
+            --text-gray: #666666;
+            --border-color: #E0E0E0;
             --font-title: 'Cormorant Garamond', serif; 
             --font-body: 'Montserrat', sans-serif;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: var(--font-body);
-            line-height: 1.6;
+            line-height: 1.5;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
         }
 
-        /* Контейнер (iPhone 14 Pro Max ~430px) */
         .container {
             width: 100%;
             max-width: 450px; 
@@ -51,113 +41,64 @@
             flex-direction: column;
         }
 
-        /* 1. ШАПКА */
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        h1 {
+        /* --- 1. ЗАГОЛОВОК (Замість імені) --- */
+        .main-title {
             font-family: var(--font-title);
-            font-size: 30px;
+            font-size: 28px;
             font-weight: 500;
-            margin-bottom: 5px;
+            text-align: center;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            line-height: 1.1;
-        }
-
-        .subtitle {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--text-gray);
+            line-height: 1.2;
+            letter-spacing: 0.5px;
             margin-bottom: 30px;
+            margin-top: 10px;
         }
 
-        /* 2. ВІДЕО */
+        /* --- 2. ВІДЕО + Оверлей "Натисніть" --- */
+        .video-container {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
         .video-wrapper {
             position: relative;
             padding-bottom: 56.25%; /* 16:9 */
             height: 0;
             background: #000;
-            margin-bottom: 40px;
             border-radius: 2px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
 
         .video-wrapper iframe {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
+            top: 0; left: 0; width: 100%; height: 100%; border: 0;
+            z-index: 10; /* Відео зверху */
         }
 
-        /* 3. ТЕКСТОВИЙ БЛОК (Структурований з транскрипції) */
-        .content {
-            margin-bottom: 40px;
-        }
-
-        .content h2 {
-            font-family: var(--font-title);
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            text-align: left;
-            font-style: italic;
-        }
-
-        .content p {
-            font-size: 14px;
-            font-weight: 300;
-            margin-bottom: 20px;
-            color: var(--text-main);
-            text-align: justify;
-        }
-
-        .content ul {
-            list-style: none;
-            margin-bottom: 25px;
-            padding-left: 10px;
-        }
-
-        .content ul li {
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 12px;
-            font-size: 14px;
-            font-weight: 400;
-        }
-
-        .content ul li::before {
-            content: "—";
-            position: absolute;
-            left: 0;
-            color: var(--text-main);
-        }
-
-        .highlight {
-            font-family: var(--font-title);
-            font-size: 18px;
-            font-weight: 600;
-            display: block;
-            margin: 25px 0 10px 0;
+        /* Підказка "Натисніть для перегляду" - зникне після кліку на ютубі */
+        .video-hint {
             text-align: center;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-gray);
+            margin-top: 8px;
         }
 
-        /* 4. КНОПКА */
+        /* --- 3. ТЕКСТ ПІД ВІДЕО --- */
+        .bonus-text {
+            text-align: center;
+            font-family: var(--font-title);
+            font-size: 20px;
+            font-style: italic;
+            font-weight: 500;
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* --- 4. КНОПКА --- */
         .btn-link {
             display: block;
             width: 100%;
@@ -174,184 +115,109 @@
             margin-bottom: 50px;
             cursor: pointer;
         }
+        .btn-link:hover { background: var(--text-main); color: #fff; }
 
-        .btn-link:hover {
-            background: var(--text-main);
-            color: #fff;
-        }
-
-        /* 5. АНКЕТА (Запит з транскрипції) */
+        /* --- 5. АНКЕТА --- */
         .form-section {
             border-top: 1px solid var(--border-color);
             padding-top: 40px;
         }
-
         .form-title {
             font-family: var(--font-title);
-            font-size: 26px;
+            font-size: 24px;
             text-align: center;
             margin-bottom: 10px;
         }
-
         .form-desc {
             text-align: center;
             font-size: 13px;
             color: var(--text-gray);
             margin-bottom: 30px;
-            font-weight: 300;
-            line-height: 1.4;
         }
-
-        /* Інпути в стилі Вікторії */
-        .input-group {
-            margin-bottom: 25px;
-        }
-
+        .input-group { margin-bottom: 25px; }
         label {
-            display: block;
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            color: var(--text-gray);
+            display: block; font-size: 10px; text-transform: uppercase;
+            letter-spacing: 1px; margin-bottom: 8px; color: var(--text-gray);
         }
-
         input {
-            width: 100%;
-            padding: 12px 0;
-            background: transparent;
-            border: none;
+            width: 100%; padding: 12px 0; background: transparent; border: none;
             border-bottom: 1px solid var(--border-color);
-            font-family: var(--font-body);
-            font-size: 16px; /* Важливо для iOS */
-            color: var(--text-main);
-            border-radius: 0;
-            -webkit-appearance: none;
-            outline: none;
-            transition: border-color 0.3s;
+            font-family: var(--font-body); font-size: 16px; color: var(--text-main);
+            border-radius: 0; -webkit-appearance: none; outline: none;
         }
-
-        input:focus {
-            border-bottom-color: var(--text-main);
-        }
-
+        input:focus { border-bottom-color: var(--text-main); }
         .btn-submit {
-            width: 100%;
-            padding: 20px;
-            background-color: var(--text-main);
-            color: #fff;
-            border: none;
-            font-family: var(--font-body);
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            margin-top: 15px;
+            width: 100%; padding: 20px; background-color: var(--text-main);
+            color: #fff; border: none; font-family: var(--font-body);
+            font-size: 13px; text-transform: uppercase; letter-spacing: 2px;
+            cursor: pointer; margin-top: 15px;
         }
-
-        footer {
-            margin-top: 60px;
-            font-size: 10px;
-            text-align: center;
-            color: #bbb;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+        footer { margin-top: 60px; font-size: 10px; text-align: center; color: #bbb; text-transform: uppercase; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
     <div class="container">
 
-        <!-- 1. ШАПКА -->
-        <div class="header">
-            <!-- Вставте своє фото в src -->
-            <img src="https://via.placeholder.com/150" alt="Avatar" class="avatar">
-            <h1>Вікторія Мещерякова</h1>
-            <div class="subtitle">Content & Visual Expert</div>
+        <!-- 1. НОВИЙ ЗАГОЛОВОК -->
+        <h1 class="main-title">
+            Як у 2026 році<br>
+            побудувати систему<br>
+            роботи з контентом та візуалом
+        </h1>
+
+        <!-- 2. ВІДЕО + НАПИС -->
+        <div class="video-container">
+            <div class="video-wrapper">
+                <!-- Встав сюди своє посилання на YouTube -->
+                <iframe 
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=1&modestbranding=1&rel=0" 
+                    title="YouTube video" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <!-- Підказка під відео -->
+            <div class="video-hint">Натисніть для перегляду</div>
         </div>
 
-        <!-- 2. ВІДЕО -->
-        <!-- !!! ВАЖЛИВО: Замініть ID у посиланні на ваше відео !!! -->
-        <div class="video-wrapper">
-            <!-- Наприклад, якщо посилання https://youtu.be/dQw4w9WgXcQ, то ID це dQw4w9WgXcQ -->
-            <iframe 
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=1&modestbranding=1&rel=0" 
-                title="Lesson Video" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
+        <!-- 3. ТЕКСТ ПРО БОНУСИ -->
+        <div class="bonus-text">
+            Забирай 2 бонуси<br>після перегляду уроку
         </div>
 
-        <!-- 3. ТЕКСТ (З вашої транскрипції) -->
-        <div class="content">
-            <h2>Як у 2026 році побудувати систему роботи з контентом</h2>
-            
-            <p>
-                Блог без фундаменту викликає фонову тривожність. Я витратила на це усвідомлення декілька років, але ви можете зробити це за один день.
-            </p>
-            <p>
-                Ефективний контент — це система, яка поєднує в собі три ключові елементи:
-            </p>
-
-            <ul>
-                <li><strong>Фундамент блогу</strong> — позбавляє хаосу та дає розуміння, що знімати.</li>
-                <li><strong>Візуальна складова</strong> — чіпляє увагу та робить інформацію читабельною.</li>
-                <li><strong>Сенси</strong> — створюють правильне враження та прогрівають до вас як до особистості та експерта.</li>
-            </ul>
-
-            <span class="highlight">СТВОРЮЙ: ВІЗУАЛ • СЕНСИ • КОНТЕНТ</span>
-            
-            <p>
-                Це структуроване навчання з чіткими кроками, яке охопить всі сфери роботи з блогом. У вас будуть готові шаблони, уроки без води та моя особиста підтримка.
-            </p>
-        </div>
-
-        <!-- 4. КНОПКА -->
-        <!-- Веде вниз до анкети, або на оплату -->
-        <a href="#form" class="btn-link">
-            ЗАПОВНИТИ АНКЕТУ ПРЕДЗАПИСУ
+        <!-- 4. КНОПКА (Scroll to form) -->
+        <a href="#anketa" class="btn-link">
+            ЗАПОВНИТИ АНКЕТУ
         </a>
 
         <!-- 5. АНКЕТА -->
-        <div class="form-section" id="form">
-            <div class="form-title">АНКЕТА</div>
-            <div class="form-desc">
-                Заповніть форму, щоб отримати спеціальну ціну та потрапити на розбір у Zoom.
-            </div>
+        <div class="form-section" id="anketa">
+            <div class="form-title">АНКЕТА ПРЕДЗАПИСУ</div>
+            <div class="form-desc">Заповніть форму, щоб отримати бонуси та доступ</div>
             
-            <!-- Підключіть Formspree або інший сервіс в action -->
             <form action="#" method="POST">
-                
                 <div class="input-group">
-                    <label for="name">Ваше Ім'я</label>
-                    <input type="text" id="name" name="name" placeholder="Введіть ім'я" required>
+                    <label>Ваше Ім'я</label>
+                    <input type="text" name="name" placeholder="Введіть ім'я" required>
                 </div>
-
                 <div class="input-group">
-                    <label for="instagram">Instagram</label>
-                    <input type="text" id="instagram" name="instagram" placeholder="@username" required>
+                    <label>Instagram</label>
+                    <input type="text" name="instagram" placeholder="@username" required>
                 </div>
-
                 <div class="input-group">
-                    <label for="telegram">Telegram</label>
-                    <input type="text" id="telegram" name="telegram" placeholder="@username" required>
+                    <label>Telegram</label>
+                    <input type="text" name="telegram" placeholder="@username" required>
                 </div>
-
                 <div class="input-group">
-                    <label for="phone">Номер телефону</label>
-                    <input type="tel" id="phone" name="phone" placeholder="+380..." required>
+                    <label>Телефон</label>
+                    <input type="tel" name="phone" placeholder="+380..." required>
                 </div>
-
-                <button type="submit" class="btn-submit">
-                    НАДІСЛАТИ ЗАЯВКУ
-                </button>
+                <button type="submit" class="btn-submit">НАДІСЛАТИ</button>
             </form>
         </div>
 
-        <footer>
-            © 2024 Course Create. All rights reserved.
-        </footer>
+        <footer>© 2024 System Content</footer>
 
     </div>
 
