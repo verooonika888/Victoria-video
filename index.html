@@ -61,7 +61,7 @@
         #phone { padding-left: 95px !important; } 
         
         /* Стилі помилок */
-        .input-error { border-bottom-color: #ef4444 !important; }
+        .input-error { border-bottom-color: #ef4444 !important; border-color: #ef4444 !important; }
         .error-msg { color: #ef4444; font-size: 12px; margin-top: 4px; display: none; }
     </style>
 </head>
@@ -111,25 +111,26 @@
                 <div class="relative group">
                     <input type="text" id="nameInput" name="name" required placeholder=" " class="peer w-full bg-transparent border-b border-gray-300 py-3 text-base focus:border-black focus:outline-none transition-colors">
                     <label class="absolute left-0 top-3 text-gray-400 text-sm transition-all peer-focus:-top-3 peer-focus:text-xs peer-focus:text-black peer-[:not(:placeholder-shown)]:-top-3 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-black pointer-events-none">Твоє ім'я</label>
-                    <div id="nameError" class="error-msg">Ім'я має містити мінімум 3 літери і не містити цифр.</div>
+                    <div id="nameError" class="error-msg">Мінімум 3 літери, без цифр.</div>
                 </div>
 
                 <!-- Phone -->
                 <div class="relative group">
                     <input type="tel" id="phone" name="phone" required class="w-full bg-transparent border-b border-gray-300 py-3 text-base focus:border-black focus:outline-none transition-colors">
-                    <div id="phoneError" class="error-msg">Будь ласка, введіть коректний номер телефону.</div>
+                    <div id="phoneError" class="error-msg">Введіть коректний номер телефону.</div>
                 </div>
 
                 <!-- Social -->
                 <div class="relative group">
-                    <input type="text" name="social" required placeholder=" " class="peer w-full bg-transparent border-b border-gray-300 py-3 text-base focus:border-black focus:outline-none transition-colors">
-                    <label class="absolute left-0 top-3 text-gray-400 text-sm transition-all peer-focus:-top-3 peer-focus:text-xs peer-focus:text-black peer-[:not(:placeholder-shown)]:-top-3 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-black pointer-events-none">Instagram або Telegram (@нікмейк)</label>
+                    <input type="text" id="socialInput" name="social" required placeholder=" " class="peer w-full bg-transparent border-b border-gray-300 py-3 text-base focus:border-black focus:outline-none transition-colors">
+                    <label class="absolute left-0 top-3 text-gray-400 text-sm transition-all peer-focus:-top-3 peer-focus:text-xs peer-focus:text-black peer-[:not(:placeholder-shown)]:-top-3 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-black pointer-events-none">Instagram або Telegram (@нікнейм)</label>
+                    <div id="socialError" class="error-msg">Мінімум 3 символи, без цифр.</div>
                 </div>
 
                 <!-- Goal -->
                 <div class="space-y-3 pt-4">
-                    <label class="block text-sm font-medium text-black">З якою метою цікавишся візуалом та контентом?</label>
-                    <div class="space-y-2">
+                    <label class="block text-sm font-medium text-black">З якою метою цікавишся візуалом та контентом? <span class="text-red-500">*</span></label>
+                    <div class="space-y-2" id="goalContainer">
                         <label class="flex items-start gap-3 cursor-pointer group p-2 hover:bg-gray-50 rounded transition-colors">
                             <input type="radio" name="goal" value="Особистий блог" class="mt-1 accent-black w-4 h-4" required>
                             <span class="text-sm text-gray-700 group-hover:text-black">Для свого особистого-експертного блогу</span>
@@ -143,21 +144,24 @@
                             <span class="text-sm text-gray-700 group-hover:text-black">Створюю (хочу створювати) візуал та контент для інших</span>
                         </label>
                     </div>
+                    <div id="goalError" class="error-msg">Будь ласка, оберіть один варіант.</div>
                 </div>
 
                 <!-- Difficulties -->
                 <div class="space-y-3 pt-4">
                     <label class="block text-sm font-medium text-black">Які зараз складнощі з блогом?</label>
-                    <textarea name="difficulties" rows="2" required class="w-full bg-gray-50 border border-gray-200 p-4 text-sm focus:border-black focus:outline-none transition-colors resize-none placeholder-gray-400" placeholder="Напиши тут..."></textarea>
+                    <textarea id="difficultiesInput" name="difficulties" rows="2" required class="w-full bg-gray-50 border border-gray-200 p-4 text-sm focus:border-black focus:outline-none transition-colors resize-none placeholder-gray-400" placeholder="Напиши тут..."></textarea>
+                    <div id="difficultiesError" class="error-msg">Мінімум 3 символи, без цифр.</div>
                 </div>
 
                 <!-- Request -->
                 <div class="space-y-3 pt-4">
                     <label class="block text-sm font-medium text-black">Який твій основний запит, що би ти хотіла отримати від курсу по контенту, візуалу та сенсам?</label>
-                    <textarea name="request" rows="3" required class="w-full bg-gray-50 border border-gray-200 p-4 text-sm focus:border-black focus:outline-none transition-colors resize-none placeholder-gray-400" placeholder="Напиши тут..."></textarea>
+                    <textarea id="requestInput" name="request" rows="3" required class="w-full bg-gray-50 border border-gray-200 p-4 text-sm focus:border-black focus:outline-none transition-colors resize-none placeholder-gray-400" placeholder="Напиши тут..."></textarea>
+                    <div id="requestError" class="error-msg">Мінімум 3 символи, без цифр.</div>
                 </div>
 
-                <!-- Scale 1-10 (ПРИБРАНО ЗАЙВІ ЦИФРИ ЗВЕРХУ) -->
+                <!-- Scale 1-10 -->
                 <div class="space-y-4 pt-4">
                     <label class="block text-sm font-medium text-black">Наскільки ти готова до роботи над контентом та візуалом? (1 - не готова, тільки цікавлюсь, 10 - готова вже зараз)</label>
                     
@@ -260,26 +264,28 @@
         const btnText = submitBtn.querySelector('span');
         const loader = submitBtn.querySelector('.loader');
 
-        // Валідація
-        function validateName() {
-            const nameInput = document.getElementById('nameInput');
-            const nameError = document.getElementById('nameError');
-            const value = nameInput.value.trim();
+        // Глобальна функція валідації текстових полів
+        function validateTextField(inputElement, errorElementId) {
+            const errorElement = document.getElementById(errorElementId);
+            const value = inputElement.value.trim();
             const hasNumbers = /\d/.test(value);
             
+            // Умова: Мінімум 3 символи, немає цифр
             if (value.length < 3 || hasNumbers) {
-                nameInput.classList.add('input-error');
-                nameError.style.display = 'block';
+                inputElement.classList.add('input-error');
+                if(errorElement) errorElement.style.display = 'block';
                 return false;
             } else {
-                nameInput.classList.remove('input-error');
-                nameError.style.display = 'none';
+                inputElement.classList.remove('input-error');
+                if(errorElement) errorElement.style.display = 'none';
                 return true;
             }
         }
 
+        // Функція перевірки телефону
         function validatePhone() {
             const phoneError = document.getElementById('phoneError');
+            // Перевіряємо, чи ввів щось користувач, і чи валідний номер
             if (!iti.isValidNumber()) {
                 phoneInput.classList.add('input-error');
                 phoneError.style.display = 'block';
@@ -291,14 +297,55 @@
             }
         }
 
-        document.getElementById('nameInput').addEventListener('input', function() {
-            this.classList.remove('input-error');
-            document.getElementById('nameError').style.display = 'none';
+        // Функція перевірки радіо кнопок (Мета)
+        function validateGoal() {
+            const goals = document.getElementsByName('goal');
+            const goalError = document.getElementById('goalError');
+            let isSelected = false;
+            for(let i = 0; i < goals.length; i++) {
+                if(goals[i].checked) isSelected = true;
+            }
+            
+            if(!isSelected) {
+                goalError.style.display = 'block';
+                return false;
+            } else {
+                goalError.style.display = 'none';
+                return true;
+            }
+        }
+
+        // Додаємо слухачів подій (щоб помилка зникала, коли користувач починає писати)
+        const fields = [
+            { id: 'nameInput', error: 'nameError' },
+            { id: 'socialInput', error: 'socialError' },
+            { id: 'difficultiesInput', error: 'difficultiesError' },
+            { id: 'requestInput', error: 'requestError' }
+        ];
+
+        fields.forEach(field => {
+            const el = document.getElementById(field.id);
+            if(el) {
+                el.addEventListener('input', function() {
+                    this.classList.remove('input-error');
+                    const err = document.getElementById(field.error);
+                    if(err) err.style.display = 'none';
+                });
+            }
         });
+
         phoneInput.addEventListener('input', function() {
             this.classList.remove('input-error');
             document.getElementById('phoneError').style.display = 'none';
         });
+
+        const goals = document.getElementsByName('goal');
+        goals.forEach(g => {
+            g.addEventListener('change', () => {
+                document.getElementById('goalError').style.display = 'none';
+            });
+        });
+
 
         // Modal Logic
         const modal = document.getElementById('successModal');
@@ -329,7 +376,17 @@
         form.addEventListener('submit', function(e) {
             e.preventDefault();
 
-            if (!validateName() || !validatePhone()) {
+            // Запускаємо перевірку всіх полів
+            const isNameValid = validateTextField(document.getElementById('nameInput'), 'nameError');
+            const isSocialValid = validateTextField(document.getElementById('socialInput'), 'socialError');
+            const isDiffValid = validateTextField(document.getElementById('difficultiesInput'), 'difficultiesError');
+            const isRequestValid = validateTextField(document.getElementById('requestInput'), 'requestError');
+            const isPhoneValid = validatePhone();
+            const isGoalValid = validateGoal();
+
+            // Якщо хоч одне поле не пройшло перевірку - зупиняємось
+            if (!isNameValid || !isSocialValid || !isDiffValid || !isRequestValid || !isPhoneValid || !isGoalValid) {
+                // Можна проскролити до першої помилки, але зазвичай видно і так
                 return;
             }
             
