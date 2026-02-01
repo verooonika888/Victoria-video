@@ -57,7 +57,7 @@
         .iti__flag-container { border: none; background: transparent; }
         .iti__selected-flag { background: transparent; }
         
-        /* Відступ зліва для інпута, щоб цифри не налізали на прапорець */
+        /* Відступ зліва для інпута */
         #phone { padding-left: 95px !important; } 
         
         /* Стилі помилок */
@@ -105,7 +105,8 @@
             </div>
 
             <form id="applicationForm" class="space-y-8" novalidate>
-                <input type="hidden" name="target_sheet" value="land2">
+                <!-- ВАЖЛИВО: Це поле каже скрипту писати в Ленд2 -->
+                <input type="hidden" name="target_sheet" value="Ленд2">
                 
                 <!-- Name -->
                 <div class="relative group">
@@ -232,6 +233,7 @@
     <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
     <script>
+        // ВСТАВЛЕНО ВАШЕ ПОСИЛАННЯ
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxBFcWB61ZDy-vF9t-Xm5AJNTnwCU559r5JMv4qWZ0vQGZV1Mlyf4qCNMbCynZxvSPWww/exec';
 
         // Ініціалізація поля телефону
@@ -264,13 +266,12 @@
         const btnText = submitBtn.querySelector('span');
         const loader = submitBtn.querySelector('.loader');
 
-        // Глобальна функція валідації текстових полів
+        // Валідація текстових полів
         function validateTextField(inputElement, errorElementId) {
             const errorElement = document.getElementById(errorElementId);
             const value = inputElement.value.trim();
             const hasNumbers = /\d/.test(value);
             
-            // Умова: Мінімум 3 символи, немає цифр
             if (value.length < 3 || hasNumbers) {
                 inputElement.classList.add('input-error');
                 if(errorElement) errorElement.style.display = 'block';
@@ -282,10 +283,9 @@
             }
         }
 
-        // Функція перевірки телефону
+        // Валідація телефону
         function validatePhone() {
             const phoneError = document.getElementById('phoneError');
-            // Перевіряємо, чи ввів щось користувач, і чи валідний номер
             if (!iti.isValidNumber()) {
                 phoneInput.classList.add('input-error');
                 phoneError.style.display = 'block';
@@ -297,7 +297,7 @@
             }
         }
 
-        // Функція перевірки радіо кнопок (Мета)
+        // Валідація мети
         function validateGoal() {
             const goals = document.getElementsByName('goal');
             const goalError = document.getElementById('goalError');
@@ -305,7 +305,6 @@
             for(let i = 0; i < goals.length; i++) {
                 if(goals[i].checked) isSelected = true;
             }
-            
             if(!isSelected) {
                 goalError.style.display = 'block';
                 return false;
@@ -315,7 +314,7 @@
             }
         }
 
-        // Додаємо слухачів подій (щоб помилка зникала, коли користувач починає писати)
+        // Слухачі подій
         const fields = [
             { id: 'nameInput', error: 'nameError' },
             { id: 'socialInput', error: 'socialError' },
@@ -346,7 +345,6 @@
             });
         });
 
-
         // Modal Logic
         const modal = document.getElementById('successModal');
         const modalBackdrop = document.getElementById('modalBackdrop');
@@ -376,7 +374,7 @@
         form.addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Запускаємо перевірку всіх полів
+            // Перевірка
             const isNameValid = validateTextField(document.getElementById('nameInput'), 'nameError');
             const isSocialValid = validateTextField(document.getElementById('socialInput'), 'socialError');
             const isDiffValid = validateTextField(document.getElementById('difficultiesInput'), 'difficultiesError');
@@ -384,9 +382,7 @@
             const isPhoneValid = validatePhone();
             const isGoalValid = validateGoal();
 
-            // Якщо хоч одне поле не пройшло перевірку - зупиняємось
             if (!isNameValid || !isSocialValid || !isDiffValid || !isRequestValid || !isPhoneValid || !isGoalValid) {
-                // Можна проскролити до першої помилки, але зазвичай видно і так
                 return;
             }
             
@@ -397,7 +393,11 @@
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
             data.phone = iti.getNumber();
+            
+            // Додаємо UTM
             const utms = getUTMParameters();
+            
+            // Збираємо фінальний об'єкт (включаючи приховане поле target_sheet)
             const finalData = { ...data, ...utms };
 
             if(typeof fbq !== 'undefined') fbq('track', 'Lead');
