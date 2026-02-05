@@ -13,9 +13,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 
-    <!-- Intl Tel Input CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
-
     <!-- Config & Pixel Setup -->
     <script>
         // --- НАЛАШТУВАННЯ ---
@@ -52,14 +49,6 @@
         input[type="radio"]:checked + div { border-color: #000; background-color: #000; color: #fff; }
         .modal-open { overflow: hidden; }
 
-        /* --- СТИЛІ ТЕЛЕФОНУ --- */
-        .iti { width: 100%; display: block; }
-        .iti__flag-container { border: none; background: transparent; }
-        .iti__selected-flag { background: transparent; }
-        
-        /* Відступ зліва для інпута */
-        #phone { padding-left: 95px !important; } 
-        
         /* Стилі помилок */
         .input-error { border-bottom-color: #ef4444 !important; border-color: #ef4444 !important; }
         .error-msg { color: #ef4444; font-size: 12px; margin-top: 4px; display: none; }
@@ -115,12 +104,6 @@
                     <div id="nameError" class="error-msg">Мінімум 3 літери, без цифр.</div>
                 </div>
 
-                <!-- Phone -->
-                <div class="relative group">
-                    <input type="tel" id="phone" name="phone" required class="w-full bg-transparent border-b border-gray-300 py-3 text-base focus:border-black focus:outline-none transition-colors">
-                    <div id="phoneError" class="error-msg">Введіть коректний номер телефону.</div>
-                </div>
-
                 <!-- Social -->
                 <div class="relative group">
                     <input type="text" id="socialInput" name="social" required placeholder=" " class="peer w-full bg-transparent border-b border-gray-300 py-3 text-base focus:border-black focus:outline-none transition-colors">
@@ -128,57 +111,11 @@
                     <div id="socialError" class="error-msg">Мінімум 3 символи, без цифр.</div>
                 </div>
 
-                <!-- Goal -->
-                <div class="space-y-3 pt-4">
-                    <label class="block text-sm font-medium text-black">З якою метою цікавишся візуалом та контентом? <span class="text-red-500">*</span></label>
-                    <div class="space-y-2" id="goalContainer">
-                        <label class="flex items-start gap-3 cursor-pointer group p-2 hover:bg-gray-50 rounded transition-colors">
-                            <input type="radio" name="goal" value="Особистий блог" class="mt-1 accent-black w-4 h-4" required>
-                            <span class="text-sm text-gray-700 group-hover:text-black">Для свого особистого-експертного блогу</span>
-                        </label>
-                        <label class="flex items-start gap-3 cursor-pointer group p-2 hover:bg-gray-50 rounded transition-colors">
-                            <input type="radio" name="goal" value="Бізнес" class="mt-1 accent-black w-4 h-4">
-                            <span class="text-sm text-gray-700 group-hover:text-black">Для свого бізнесу</span>
-                        </label>
-                        <label class="flex items-start gap-3 cursor-pointer group p-2 hover:bg-gray-50 rounded transition-colors">
-                            <input type="radio" name="goal" value="Кріейтор" class="mt-1 accent-black w-4 h-4">
-                            <span class="text-sm text-gray-700 group-hover:text-black">Створюю (хочу створювати) візуал та контент для інших</span>
-                        </label>
-                    </div>
-                    <div id="goalError" class="error-msg">Будь ласка, оберіть один варіант.</div>
-                </div>
-
-                <!-- Difficulties -->
-                <div class="space-y-3 pt-4">
-                    <label class="block text-sm font-medium text-black">Які зараз складнощі з блогом?</label>
-                    <textarea id="difficultiesInput" name="difficulties" rows="2" required class="w-full bg-gray-50 border border-gray-200 p-4 text-sm focus:border-black focus:outline-none transition-colors resize-none placeholder-gray-400" placeholder="Напиши тут..."></textarea>
-                    <div id="difficultiesError" class="error-msg">Мінімум 3 символи, без цифр.</div>
-                </div>
-
-                <!-- Request -->
-                <div class="space-y-3 pt-4">
-                    <label class="block text-sm font-medium text-black">Який твій основний запит, що би ти хотіла отримати від курсу по контенту, візуалу та сенсам?</label>
-                    <textarea id="requestInput" name="request" rows="3" required class="w-full bg-gray-50 border border-gray-200 p-4 text-sm focus:border-black focus:outline-none transition-colors resize-none placeholder-gray-400" placeholder="Напиши тут..."></textarea>
-                    <div id="requestError" class="error-msg">Мінімум 3 символи, без цифр.</div>
-                </div>
-
-                <!-- Scale 1-10 -->
-                <div class="space-y-4 pt-4">
-                    <label class="block text-sm font-medium text-black">Наскільки ти готова до роботи над контентом та візуалом? (1 - не готова, тільки цікавлюсь, 10 - готова вже зараз)</label>
-                    
-                    <div class="flex justify-between gap-1 md:gap-2">
-                        <!-- Radio loop 1-10 -->
-                        <label class="cursor-pointer flex-1"><input type="radio" name="readiness" value="1" class="peer sr-only"><div class="w-full aspect-square md:aspect-auto md:h-10 flex items-center justify-center border border-gray-200 text-gray-400 peer-checked:bg-black peer-checked:text-white peer-checked:border-black hover:border-black transition-all text-sm">1</div></label>
-                        <label class="cursor-pointer flex-1"><input type="radio" name="readiness" value="2" class="peer sr-only"><div class="w-full aspect-square md:aspect-auto md:h-10 flex items-center justify-center border border-gray-200 text-gray-400 peer-checked:bg-black peer-checked:text-white peer-checked:border-black hover:border-black transition-all text-sm">2</div></label>
-                        <label class="cursor-pointer flex-1"><input type="radio" name="readiness" value="3" class="peer sr-only"><div class="w-full aspect-square md:aspect-auto md:h-10 flex items-center justify-center border border-gray-200 text-gray-400 peer-checked:bg-black peer-checked:text-white peer-checked:border-black hover:border-black transition-all text-sm">3</div></label>
-                        <label class="cursor-pointer flex-1"><input type="radio" name="readiness" value="4" class="peer sr-only"><div class="w-full aspect-square md:aspect-auto md:h-10 flex items-center justify-center border border-gray-200 text-gray-400 peer-checked:bg-black peer-checked:text-white peer-checked:border-black hover:border-black transition-all text-sm">4</div></label>
-                        <label class="cursor-pointer flex-1"><input type="radio" name="readiness" value="5" class="peer sr-only"><div class="w-full aspect-square md:aspect-auto md:h-10 flex items-center justify-center border border-gray-200 text-gray-400 peer-checked:bg-black peer-checked:text-white peer-checked:border-black hover:border-black transition-all text-sm">5</div></label>
-                        <label class="cursor-pointer flex-1"><input type="radio" name="readiness" value="6" class="peer sr-only"><div class="w-full aspect-square md:aspect-auto md:h-10 flex items-center justify-center border border-gray-200 text-gray-400 peer-checked:bg-black peer-checked:text-white peer-checked:border-black hover:border-black transition-all text-sm">6</div></label>
-                        <label class="cursor-pointer flex-1"><input type="radio" name="readiness" value="7" class="peer sr-only"><div class="w-full aspect-square md:aspect-auto md:h-10 flex items-center justify-center border border-gray-200 text-gray-400 peer-checked:bg-black peer-checked:text-white peer-checked:border-black hover:border-black transition-all text-sm">7</div></label>
-                        <label class="cursor-pointer flex-1"><input type="radio" name="readiness" value="8" class="peer sr-only"><div class="w-full aspect-square md:aspect-auto md:h-10 flex items-center justify-center border border-gray-200 text-gray-400 peer-checked:bg-black peer-checked:text-white peer-checked:border-black hover:border-black transition-all text-sm">8</div></label>
-                        <label class="cursor-pointer flex-1"><input type="radio" name="readiness" value="9" class="peer sr-only"><div class="w-full aspect-square md:aspect-auto md:h-10 flex items-center justify-center border border-gray-200 text-gray-400 peer-checked:bg-black peer-checked:text-white peer-checked:border-black hover:border-black transition-all text-sm">9</div></label>
-                        <label class="cursor-pointer flex-1"><input type="radio" name="readiness" value="10" class="peer sr-only" checked><div class="w-full aspect-square md:aspect-auto md:h-10 flex items-center justify-center border border-gray-200 text-gray-400 peer-checked:bg-black peer-checked:text-white peer-checked:border-black hover:border-black transition-all text-sm">10</div></label>
-                    </div>
+                <!-- Niche (New Field) -->
+                <div class="relative group">
+                    <input type="text" id="nicheInput" name="niche" required placeholder=" " class="peer w-full bg-transparent border-b border-gray-300 py-3 text-base focus:border-black focus:outline-none transition-colors">
+                    <label class="absolute left-0 top-3 text-gray-400 text-sm transition-all peer-focus:-top-3 peer-focus:text-xs peer-focus:text-black peer-[:not(:placeholder-shown)]:-top-3 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-black pointer-events-none">Твоя ніша</label>
+                    <div id="nicheError" class="error-msg">Обов'язкове поле.</div>
                 </div>
                 
                 <p class="text-center text-xs text-gray-500 pt-4 pb-2">Заповнюй, і я зв'яжусь з тобою щодо участі</p>
@@ -231,25 +168,9 @@
     </a>
 
     <!-- SCRIPTS -->
-    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
     <script>
         // ВСТАВЛЕНО ВАШЕ ПОСИЛАННЯ
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwSaSkvHXzOlz-7N1eQQWW8Rt7k-dWSNoZrTmcZ0TMOUg7n6VGPDTyK66ed2eD1Uk6f/exec';
-
-        // Ініціалізація поля телефону
-        const phoneInput = document.querySelector("#phone");
-        const iti = window.intlTelInput(phoneInput, {
-            initialCountry: "auto",
-            geoIpLookup: function(callback) {
-                fetch("https://ipapi.co/json")
-                .then(function(res) { return res.json(); })
-                .then(function(data) { callback(data.country_code); })
-                .catch(function() { callback("UA"); });
-            },
-            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
-            separateDialCode: true,
-            allowDropdown: true
-        });
 
         // UTM
         function getUTMParameters() {
@@ -267,12 +188,13 @@
         const loader = submitBtn.querySelector('.loader');
 
         // Валідація текстових полів
-        function validateTextField(inputElement, errorElementId) {
+        function validateTextField(inputElement, errorElementId, allowNumbers = false) {
             const errorElement = document.getElementById(errorElementId);
             const value = inputElement.value.trim();
             const hasNumbers = /\d/.test(value);
             
-            if (value.length < 3 || hasNumbers) {
+            // Якщо allowNumbers false, перевіряємо наявність цифр (наприклад, для Імені)
+            if (value.length < 2 || (!allowNumbers && hasNumbers)) {
                 inputElement.classList.add('input-error');
                 if(errorElement) errorElement.style.display = 'block';
                 return false;
@@ -283,43 +205,11 @@
             }
         }
 
-        // Валідація телефону
-        function validatePhone() {
-            const phoneError = document.getElementById('phoneError');
-            if (!iti.isValidNumber()) {
-                phoneInput.classList.add('input-error');
-                phoneError.style.display = 'block';
-                return false;
-            } else {
-                phoneInput.classList.remove('input-error');
-                phoneError.style.display = 'none';
-                return true;
-            }
-        }
-
-        // Валідація мети
-        function validateGoal() {
-            const goals = document.getElementsByName('goal');
-            const goalError = document.getElementById('goalError');
-            let isSelected = false;
-            for(let i = 0; i < goals.length; i++) {
-                if(goals[i].checked) isSelected = true;
-            }
-            if(!isSelected) {
-                goalError.style.display = 'block';
-                return false;
-            } else {
-                goalError.style.display = 'none';
-                return true;
-            }
-        }
-
-        // Слухачі подій
+        // Слухачі подій для очищення помилок при введенні
         const fields = [
             { id: 'nameInput', error: 'nameError' },
             { id: 'socialInput', error: 'socialError' },
-            { id: 'difficultiesInput', error: 'difficultiesError' },
-            { id: 'requestInput', error: 'requestError' }
+            { id: 'nicheInput', error: 'nicheError' }
         ];
 
         fields.forEach(field => {
@@ -331,18 +221,6 @@
                     if(err) err.style.display = 'none';
                 });
             }
-        });
-
-        phoneInput.addEventListener('input', function() {
-            this.classList.remove('input-error');
-            document.getElementById('phoneError').style.display = 'none';
-        });
-
-        const goals = document.getElementsByName('goal');
-        goals.forEach(g => {
-            g.addEventListener('change', () => {
-                document.getElementById('goalError').style.display = 'none';
-            });
         });
 
         // Modal Logic
@@ -375,14 +253,11 @@
             e.preventDefault();
 
             // Перевірка
-            const isNameValid = validateTextField(document.getElementById('nameInput'), 'nameError');
-            const isSocialValid = validateTextField(document.getElementById('socialInput'), 'socialError');
-            const isDiffValid = validateTextField(document.getElementById('difficultiesInput'), 'difficultiesError');
-            const isRequestValid = validateTextField(document.getElementById('requestInput'), 'requestError');
-            const isPhoneValid = validatePhone();
-            const isGoalValid = validateGoal();
+            const isNameValid = validateTextField(document.getElementById('nameInput'), 'nameError', false); // Без цифр
+            const isSocialValid = validateTextField(document.getElementById('socialInput'), 'socialError', true); // Цифри дозволені в ніках
+            const isNicheValid = validateTextField(document.getElementById('nicheInput'), 'nicheError', true); // Цифри дозволені в ніші
 
-            if (!isNameValid || !isSocialValid || !isDiffValid || !isRequestValid || !isPhoneValid || !isGoalValid) {
+            if (!isNameValid || !isSocialValid || !isNicheValid) {
                 return;
             }
             
@@ -392,12 +267,11 @@
 
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
-            data.phone = iti.getNumber();
             
             // Додаємо UTM
             const utms = getUTMParameters();
             
-            // Збираємо фінальний об'єкт (включаючи приховане поле target_sheet)
+            // Збираємо фінальний об'єкт
             const finalData = { ...data, ...utms };
 
             if(typeof fbq !== 'undefined') fbq('track', 'Lead');
