@@ -16,7 +16,8 @@
     <!-- Config & Pixel Setup -->
     <script>
         // --- НАЛАШТУВАННЯ ---
-        const PIXEL_ID = '1230047148487254'; // Вставте ID пікселя
+        // ВИПРАВЛЕНО: Залишено тільки ID (цифри), щоб піксель працював
+        const PIXEL_ID = '1230047148487254'; 
         // ---------------------
 
         tailwind.config = {
@@ -274,7 +275,7 @@
             // Збираємо фінальний об'єкт
             const finalData = { ...data, ...utms };
 
-            if(typeof fbq !== 'undefined') fbq('track', 'Lead');
+            // ТУТ БУВ КОД LEAD - Я ЙОГО ВИДАЛИВ
 
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
